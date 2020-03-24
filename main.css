@@ -99,3 +99,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
 }
+
+.primary {
+    color: #2C97DE;
+}

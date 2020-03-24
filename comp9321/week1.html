@@ -66,13 +66,102 @@
         
     </div>
 
+    <h2>Data Access</h2>
+    <button class="accordion">Obtaining Data</button>
+    <div class="panel">
+        <ul>
+            <li>Data comes from everywhere</li> 
+            <li>Web, documents, emails, spreadsheets, videos etc</li>
+            <li>Data comes in many formats</li>
+            <li>unformatted, pdf, html, xml/json, csv etc</li>
+        </ul>    
+    </div>
+
+    <button class="accordion">Reading Data</button>
+    <div class="panel">
+        <h3>Unformatted</h3>
+        <ul>
+            <li>Data from things like emails or newsletters. No clear formatting.</li>
+            <li>To extract data that we want, there are NLP (Natural languange processing) and Machine Learning solutions which are developing.</li>
+            <li>Can't expect it to be perfect!</li>
+        </ul>    
+
+        <h3>PDF</h3>
+        <p>PDF's are hard to extract data from.</p>
+        <ul>
+            <li>Need to extract text, images, tables</li>
+            <li>Text is not bad, can do that with external programs -> but then its pretty much unformatted text.</li>
+            <li>Tables are a problem for the computer to detect and then read, since theyre formatted in a specific way.</li>
+        </ul>
+        
+        <h3>HTML</h3>
+        <p>HTML is easier</p>
+        <ul>
+            <li>HTML is a semantic language - there is structure to things</li>
+            <li>Up to the creator to label things to their own preferences.</li>
+            <li>Can use things like Beautiful Soup to scrape HTML documents for specific tags/classes/ids.</li>
+        </ul>
+
+        <h3>XML/JSON</h3>
+        <p>This is the good stuff.</p>
+        <ul>
+            <li>Structured data</li>
+            <li>metadata present</li>
+            <li>Easy traversal and extraction</li>
+            <li>typical of APIs</li>
+        </ul>
+
+        <h3>CSV</h3>
+        <p>This is good for tables</p>
+        <ul>
+            <li>Can be easily turned into a table/Excel</li>
+            <li>Most CSV actually comes from spreadsheets</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Data Models</button>
+    <div class="panel">
+        <h3>Relational vs "NoSQL"</h3>
+        <p>Relational/SQL models are very popular and have proven themselves to be the data model of choice for many applications.</p>
+        <p>In recent years however, there has been the rise of NoSQL.</p>
+        <h4>Why NoSQL?</h4>
+        <ul>
+            <li>Scalable</li> 
+            <li>Expressive and Dynamic</li>
+            <li>Not constrained to a schema/table</li>
+        </ul>    
+
+        <h4>What's wrong with Relational?</h4>
+        <ul>
+            <li>lots of joining</li>
+            <li>mismatch between tables</li>
+            <li>The MAIN thing is that it requires thoughtful modeling of data and to get some data itll need some querying skillz.</li>
+        </ul>
+
+        <h4>Concluding Statements</h4>
+        <ul>
+            <li>Both Data Models work well</li>
+            <li>Suitablility of a model depends on context</li>
+            <li>Looking for something robust? Something with M-M and M-1 relationships? Go with a Relational DB. These are developed with high levels of consideration for what the data should look like and support joining tables (highly optimised).</li>
+            <li>For something more scalable and flexible, NoSQL is great.</li>
+        </ul>
+    </div>
+    <button class="accordion">Impedance Mismatch Problem</button>
+    <div class="panel">
+        <ul>
+            <li>Data comes from everywhere</li> 
+            <li>Web, documents, emails, spreadsheets, videos etc</li>
+            <li>Data comes in many formats</li>
+            <li>unformatted, pdf, html, xml/json, csv etc</li>
+        </ul>    
+    </div>
+
     <br>
     <div class="bot-nav">
         <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
         <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
     </div>
-    
-    
+
 </main>
 </body>
 
