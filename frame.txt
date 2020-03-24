@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 1</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Single Cylcle Processor</h2>
+    <button class="accordion">Basic Mips Implementation</button>
+    <div class="panel">
+        <p>There are 3 main instuctions of the MIPS instruction set. These are:</p>
+        <ul>
+            <li>Memory Referencing Instructions (lw, sw)</li>
+            <li>Arithmetic/Logic Instructions (add, OR)</li>
+            <li>Branching Instructions (beq, j)</li>
+        </ul>
+    </div>
+    
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>

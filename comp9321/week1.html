@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 1</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Introduction</h2>
+    <button class="accordion">Data Services</button>
+    <div class="panel">
+        <ul>
+            <li>Data Services are software services that help perople operate on data</li>
+            <li>We make data services because nowadays data is very messy, we try to make it easier</li>
+            <li>We tackle complexity and provide a layer of abstraction so help data consumers.</li>
+        </ul>
+    </div>
+
+    <button class="accordion">InfoSys/Applications Integration</button>
+    <div class="panel">
+        <ul>
+            <li>Combining/Integration technologies to make something better</li>
+            <li>Motivations: streamlined services, mergers/acquisitions, tech developement, competition, globalisation</li>
+            <li>Problems: sometimes these apps are designed to be integrated. May be built on different platforms, use different schema etc</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Data Level Integration</button>
+    <div class="panel">
+        <ul>
+            <li>We can combine different apps on a data level</li> 
+            <li>Maintain the original schemas, but wrap all of the sources in a wrapper</li>
+            <li>They are wrapped so they can be queries by a universal mediator which the applications/customers can interact with</li>
+        </ul>
+        <div class="img-frame">
+            <img src="img/data-int.png" alt="">
+        </div>
+    </div>
+
+    <button class="accordion">Services</button>
+    <div class="panel">
+        <ul>
+            <li>We are constant abstracting -> led us to services (SOA - software as a service)</li> 
+            <li>Continously maintained by a provider for consumers</li>
+            <li>Explicit purpose and interaction</li>
+            <li>Composeable (LEGO blocks)</li>
+        </ul>
+        <div class="img-frame">
+            <img src="img/services.png" alt="">
+        </div>
+        
+    </div>
+
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
