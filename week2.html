@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<main class="container">
+    <h1>Week 2</h1>
+    <h2>Multi-Cycle Processor</h2>
+    
+    <button class="accordion">Disadvantages of Single Cycle</button>
+    <div class="panel">
+        <p>The main problem with single cylce processors is its performance.</p>
+        <ul>
+            <li>Each instruction that is run on a single cycle processor takes one clock cycle (CPI = 1)</li>
+            <li>The length of this clock cycle depends on the longest intruction</li>
+            <li>The longest instruction in lw which has to do the initial PC, Instruction Fetch, Registers, Mux and then it has the ALU execution, accessing Data Memory and write back.</li>
+            <li>Each instruction must now run on a clock cylce time dependent on the length of time it takes for lw to execute.</li>
+        </ul>
+
+        <div class="img-frame">
+          <img src="/img/cct-lw.png" alt="">
+      </div>
+    </div>
+    
+    <button class="accordion">Multi-Cycle Superiority</button>
+    <div class="panel">
+      <h4>What is a Multi-Cycle Processor</h4>
+        <p>
+          The main things to note about the Multi-Cycle Processor are:
+          <ul>
+            <li>It has registers between the main stages of the processor</li>
+            <li>One clock cycle for each stage</li>
+            <li>Clock Cycle time dependent on the longest stage</li>
+            <li>CPI depends on type of instruction. (R-type uses IF, RR, EX, WB which would be 4 clock cylces)</li>
+          </ul>
+        </p>
+      
+        <h4>Why is it better?</h4>
+        <p>Since the CPI is smaller for instructions which require less stages, the average clock time for the instructions decreases (as opposed to a single cycle where all instructions are on clock cycle and execution time given by the longest instruction: lw).</p>
+        <p>overall latency is reduced, thus performance is increased.</p>
+        
+    </div>
+
+
+    <div class="bot-nav">
+        <a class="week-btn" href="/week1.html"><i class="fas fa-arrow-left"></i> Week 1</i></a>
+        <a class="week-btn" href="/index.html">Home</i></a>
+        <a class="week-btn" href="/week3.html">Week3 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>

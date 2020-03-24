@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 1</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Single Cylcle Processor</h2>
+    <button class="accordion">Basic Mips Implementation</button>
+    <div class="panel">
+        <p>There are 3 main instuctions of the MIPS instruction set. These are:</p>
+        <ul>
+            <li>Memory Referencing Instructions (lw, sw)</li>
+            <li>Arithmetic/Logic Instructions (add, OR)</li>
+            <li>Branching Instructions (beq, j)</li>
+        </ul>
+    </div>
+    
+    <button class="accordion">An Overview of the Implementation</button>
+    <div class="panel">
+        <h4>Program Counter</h4>
+        <p>During the execution, the processor will need to keep track of what part of the code its up to with the program counter.</p>
+        <h4>Instruction Memory</h4>
+        <p>All the instructions need the processor to retrieve the instruction (Instruction Fetch).</p>
+        <h4>Registers</h4>
+        <p>All the instructions need the processor to access and read the registers. Some instructions need to write to the refisters</p>
+        <h4>ALU</h4>
+        <p>All the instructions (except j) will need to do some sort of arithmatic (add, sub) using the ALU. Even memory and branching instructions need to add the offset.</p>
+        <h4>Data Memory</h4>
+        <p>Memory Referencing instructions need to access the data memory to read/write.</p>
+        
+        <div class="img-frame">
+            <img src="/img/overview-implementation.PNG" alt="">
+        </div>
+    </div>
+
+    <button class="accordion">Building a Datapath</button>
+    <div class="panel">
+        <p>Here we are going to get into the nitty gritty of each of the types of the instructions and how they are implemented in the processor.</p>
+
+        <h4>R-Type Instructions (Arithmetic-Logic Unit)</h4>
+        <p>lets look at how to code <code>add $t1, $t2, $t3</code> </p>
+    
+        <p>
+            1. We will first need to get the instruction:
+            <ul>
+                <li>PC sends address to Instruction memory which spits out an instruction</li>
+                <li>Instruction Memory sends the instruction onwards (add)</li>
+                <li>The PC should increment (+4)</li>
+            </ul>
+            This step needs us to have a PC, IM and an adder to increment the PC.
+        </p>
+    
+        <div class="img-frame">
+            <img src="/img/pc-im-adder.png" alt="">
+        </div>
+    
+        <p>
+            2. Next the Instruction must be decoded:
+            <ul>
+                <li>The corrct registers need to be read ($t2, $t3) from register file</li>
+                <li>The corrct registers need to be able to be written to ($t1)</li>
+                <li>The read data from the registers are sent onwards to the ALU</li>
+            </ul>
+            This step needs us to have a the Register File.
+        </p>
+    
+        <p>
+            3. Then the Instruction has to be executed:
+            <ul>
+                <li>The read data is received by the ALU and added</li>
+                <li>The ALU produces an ALU Result which is then written back to the register file</li>
+            </ul>
+            This step needs us to have a the ALU.
+        </p>
+    
+        <div class="img-frame">
+            <img src="img/reg-alu.png" alt="">
+            <p>note the blue lines which represent the control signals to each of the components.</p>
+        </div>
+    
+        <h4>Memory Access Instructions</h4>
+        <p>Lets now consider lw and sw. For example, you might run this code: <code>lw $t1, offset_value($t2)</code></p>
+        <p>In this case we will need to add more to out implementation, namely the Data Memory - this is where we can access things saved in data.</p>
+    
+        <p>
+            1. Get Instruction <br>
+            2. Set read/write registers <br>
+            These we know how to do already with the PC, Instruction memory and the Register File.  
+        </p>
+        <p>
+            3. Get the address by adding the offset.
+            <ul>
+                <li>The offset is 16bit and needs to be changed to 32bit before being put into the ALU</li>
+                <li>ALU to add $t2 + offset_value</li>
+            </ul>
+            For this we will need a sign-extender to change 16bit to 32bit.
+        </p>
+        <p>
+            4. Read the data in the address and write it to the register ($t1). <br>
+            For this we will the Data Memory component to read the data from.
+        </p>
+        <div class="img-frame">
+            <img src="img/datamem-signext.png" alt="">
+        </div>
+    
+        <h4>Branching Operations</h4>
+        <p>Most of the components required for Branching are already in place. However there are some important things to note:
+            <ul>
+                <li>PC Incrementation is sign extended and then left shifted twice such to produce a 2bit word offset.</li>
+                <li>The ALU should produce a zero output so that the logic for BEQ can be determined by an AND gate (zero && branch-instr)</li>
+            </ul>
+        </p>
+    
+        <h4>Current Implementation</h4>
+        <div class="img-frame">
+            <img src="img/imp-4.3.png" alt="">
+        </div>
+    </div>
+    
+    <button class="accordion">Control Implementation Scheme</button>
+    <div class="panel">
+        <p>Let's have a closer look at the control systems in place to handle all the different types of instructions.</p>
+
+        <h4>ALU Control</h4>
+        <p>The ALU does many types of operations - add, sub, AND, OR, NOR, slt. How does the ALU know when to do what? The ALU Control.</p>
+        <div class="img-frame">
+            <img src="img/alu-ctrl.png" alt="">
+            <p>Prettu much, the Main Control (we will look at later) gets the instruction opcode and sends the ALUOp to the ALU Control which decodes it and sends it to the ALU which then knows what operation to perform.</p>
+            <img src="img/opcodes.png" alt="">
+            <p>For an ALU instruction, the operation is fully defined by the O and the funct.</p>
+        </div>
+    
+        <h4>Main Control</h4>
+        <p>The rest of the control signals are handled by the main control except for the zero signal which comes from the ALU output.</p>
+        <div class="img-frame">
+            <img src="img/imp-4.4.png" alt="">
+            <img src="img/main-ctrl.png" alt="">
+        </div>
+    </div>
+
+    <h2>Performance</h2>
+
+    <button class="accordion">What is Performance?</button>
+    <div class="panel">
+        <h4>Performance metrics</h4>
+        <p>Performance of a processor or computer is thought about in 2 ways:
+            <ul>
+                <li>Throughput</li>
+                <li>Latency</li>
+            </ul>
+        </p>
+        <p>Throughput is the amount of work that can be done in a given amount of time.</p>
+
+        <p>Latency is the time it takes to complete an action.</p>
+    </div>
+
+    <button class="accordion">Good Performance</button>
+    <div class="panel">
+        <h4>What is the ideal performance?</h4>
+        <p>In most cases we want to:
+            <ul>
+                <li>increase throughput</li>
+                <li>decrease latency</li>
+            </ul>
+        </p>
+        <p>
+            NOTE: increasing throughput does not always imply decreasing latency/response time.
+            E.g. adding additional processors to a system might increase throughput, but have the requests que up which doesn't decrease the latency.
+        </p>
+    </div>
+
+    <button class="accordion">Comparing and Measuring Performance</button>
+    <div class="panel">
+        <h4>Comparing Performance</h4>
+        <p>When comparing the performance of two systems. You say A is n times faster than B where n = latency(B)/latency(A).</p>
+        <p>OR n = throughput(A)/throughput(B).</p>
+        <p>Just use your brain to remember which is what. If A is a better performer, then n should be greater than 1.</p>
+
+        <h4>Measuring Performance</h4>
+        <div class="img-frame">
+            <img src="/img//performance-calc.png" alt="">
+        </div>
+        <div class="img-frame">
+            <img src="/img/cpi-calc.png" alt="">
+        </div>
+    </div>
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="/index.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="/week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
