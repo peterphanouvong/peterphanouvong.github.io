@@ -102,4 +102,11 @@ a:hover {
 
 .primary {
     color: #2C97DE;
+    transition: 0.3s ease;
+}
+
+
+.primary:hover {
+    color: #227FBB;
+    transition: 0.3s ease;
 }

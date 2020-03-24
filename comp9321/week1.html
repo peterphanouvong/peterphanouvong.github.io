@@ -146,14 +146,28 @@
             <li>For something more scalable and flexible, NoSQL is great.</li>
         </ul>
     </div>
-    <button class="accordion">Impedance Mismatch Problem</button>
+    <button class="accordion">Impedance Mismatch Problems</button>
     <div class="panel">
+        <p>This is mapping OO to RDBMS</p>
+        <h4>Granularity Problem</h4>
+        <p>Talks about how things should be broken up / grouped together</p>
         <ul>
-            <li>Data comes from everywhere</li> 
-            <li>Web, documents, emails, spreadsheets, videos etc</li>
-            <li>Data comes in many formats</li>
-            <li>unformatted, pdf, html, xml/json, csv etc</li>
+            <li>Is address its own Table? or is a part of the User?</li> 
+            <li>Should address be a string? or broken up into more components?</li>
         </ul>    
+
+        <h4>Identity Concept Problem</h4>
+        <p>Objects can be equal (same attributes) or identical (same).</p>
+        <ul>
+            <li>RDB cannot distinguish as the only concept of identity is primary key.</li>
+            <li>this is a problem</li>
+        </ul>
+
+        <h4>Association Problem</h4>
+        <p>This is when 2 objects are associated with eachother, and each need to hold a reference of the other -> 2 way representation is inefficient.</p>
+
+        <h4>Object Graph Navigation</h4>
+        <p>Object method chaining is normal to do, but in RDMBS that means lots of joins which is bad.</p>
     </div>
 
     <br>
