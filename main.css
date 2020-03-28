@@ -108,7 +108,7 @@ a:hover {
 }
 
 .bot-nav {
-    padding-top: 3rem;
+    padding: 3rem 0 ;
     display: flex;
     justify-content: space-between;
 }

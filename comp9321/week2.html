@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 | Data Cleansing</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 2</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Data Cleansing</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <ul>
+            <li>Data Cleansing/Cleaning is removing or correcting data that detracts from the quality/usability of the data.</li>
+            <li>Data sets can be messy and messy data can be easilty misinterpreted.</li>
+            <li>Data Cleansing will increase the quality of the data you have
+                <ul>
+                    <li>More consistent</li>
+                    <li>More complete</li>
+                    <li>More accurate</li>
+                    <li>More uniform</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <button class="accordion">Some Examples of Issues</button>
+    <div class="panel">
+        <ul>
+            <li>Unit Mismatch - dont know the unit value of something queried 100s 1000s 10000s ?</li>
+            <li>Entity Resolution - query something but it has a different labelling in the db</li>
+            <li>Missing Data - query something that doesnt exist</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Dirty Data</button>
+    <div class="panel">
+        <ul>
+            <li>Unit Mismatch - dont know the unit value of something queried 100s 1000s 10000s ?</li>
+            <li>Entity Resolution - query something but it has a different labelling in the db</li>
+            <li>Missing Data - query something that doesnt exist</li>
+        </ul>
+    </div>
+
+    
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>

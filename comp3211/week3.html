@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 3</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Pipelined Processors</h2>
+    <button class="accordion">Overview of Pipelining</button>
+    <div class="panel">
+        <p>Pipelining is an implementation technique in which multiple instructions are overlapped in execution.</p>
+        <div class="img-frame">
+            <img src="img/instrtime.PNG" alt="">
+        </div>
+        <ul>
+            <li>The same principle is applied to pipelined processors over the 5 stages:</li>
+            <li>Fetch Instruction from memory</li>
+            <li>Read registers while decoding the instruction</li>
+            <li>Execute instruction / calculate address</li>
+            <li>Access an operand in data memory</li>
+            <li>Write the result back to a register</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Pipeline Instruction Execution</button>
+    <div class="panel">
+        <h3>Single Cycle vs Pipelined Execution</h3>
+        <ul>
+            <li>Single Cycle, cycle time takes the time of the longest instruction (LW)</li>
+            <li>Pipelined cycle time takes the time of the longest STAGE.</li>
+            <li>Still, pipelined will be multiple times faster.</li>
+            <li>The amount of speedup is approximately equal to the number of stages.</li>
+            <li>This speed up is achieved by increasing instruction THROUGHPUT, the execution time is still going to be mostly the same.</li>
+        </ul>
+
+        <div class="img-frame">
+            <img src="img/instrtime.PNG" alt="">
+        </div>
+
+        <div class="img-frame">
+            <img src="img/singvpip.PNG" alt="">
+        </div>
+    </div>
+
+    <button class="accordion">Mips is Designed for Pipelining</button>
+    <div class="panel">
+        <ul>
+            <li>1. All instructions are the same length. This makes decoding them easy.</li>
+            <li>2. Mips has only a few instruction formats with source reg in same spot all the time; this symmetry means the second stage can begin reading that reg file while also decoding the instruction.</li>
+            <li>if that was not the case, this would have to be split into 2 separate stages --> results in 6 total instr.</li>
+            <li>3. The only memory operations we have are load and store, this reduces complexity --> allows us to use the execution stage to determine the address.</li>
+            <li>4. Alignment of memory operands means that memory access only takes one cycle.</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Pipeline Hazards</button>
+    <div class="panel">
+        <p>A pipeline hazard is a situation where the queued next instruction cannot execute on the next clock cycle.</p>
+        <p>There are 3 types of hazars</p>
+
+        <h3>Structural Hazards</h3>
+        <ul>
+            <li>Structura hazards are hazards that occur because the structural design of the components in the processor cannot support the doing those instructions in that order/at the same time</li>
+            <li>An example of this would be when two separate instructions try to access the same memory at the same time</li>
+        </ul>
+
+        <h3>Data Hazards</h3>
+        <ul>
+            <li>Data Hazards occur when the next instruction doesnt have the data it needs yet</li>
+            <li>E.g. add r3 r3 r2 - sub r4 r5 r3</li>
+            <li>Here r3 is a dependancy for the sub, since it has to wait until the add is done to get the value of r3</li>
+            <li>This means that if we wait for the add instruction to complete, we have effectively lost clock cycles.</li>
+            <li>To fix these data hazards we implement forwarding or bypassing where the value of r3 as soon as it comes out the ALU is sent to be used in the sub instruction.</li>
+        </ul>
+
+        <h3>Control Hazards</h3>
+        <ul>
+            <li>Control Hazards are hazards that occur due to control instructions (branches)</li>
+            <li>When a branch happens we have to wait for the outcome i.e. where do we go from here? up or down?</li>
+            <li>its perfectly fine to wait for the branch to finish, this is called a STALL</li>
+            <li>Stalls can add up and become significant</li>
+            <li>
+                The solution to control hazards is PREDICTION
+                <ul>
+                    <li>Static - always predict itll be yes. If it is yes then no wait, if not we must stall</li>
+                    <li>Dynamic - base the current prediction on the result of previous predictions. right now we are getting 90% correct</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <h2>Pipelined Datapath and Control</h2>
+    <button class="accordion">Stage Representation</button>
+    <div class="panel">
+        <div class="img-frame">
+            <img src="img/stagerep.PNG" alt="">
+        </div>
+        <ul>
+            <li>5 stage partitioning</li>
+            <li>green lines are right to left</li>
+            <li>can be operation/component partitioning</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Pipeline Stages</button>
+    <div class="panel">
+        <div class="img-frame">
+            <img src="img/pipreg.PNG" alt="">
+        </div>
+        <ul>
+            <li>to pipeline, we add registers in between the components</li>
+            <li>these registers are labelled depending on whats to the left and right of them</li>
+            <li>it takes one clock cycle to go from one register to the next</li>
+            <li>these registers must exist to hold onto the data</li>
+            <li>there is no wb register as it goes straight to a register</li>
+            <li>PC is also like a register</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Pipelined Control</button>
+    <div class="panel">
+        <ul>
+            <li>Same logic as the single cycle control</li>
+            <li>Control should be grouped by each stage since each signal is associated with a component which is active in one pipeline stage.</li>
+        </ul>
+        <div class="img-frame">
+            <img src="img/pipctrl.PNG" alt="">
+            <img src="img/pipctrl2.PNG" alt="">
+        </div>
+    </div>
+    
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
