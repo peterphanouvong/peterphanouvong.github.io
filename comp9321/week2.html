@@ -49,11 +49,37 @@
 
     <button class="accordion">Dirty Data</button>
     <div class="panel">
+        <p>There are many views of dirty data. Lets look at some of them.</p>
+        <h3>Statistics View</h3>
         <ul>
-            <li>Unit Mismatch - dont know the unit value of something queried 100s 1000s 10000s ?</li>
-            <li>Entity Resolution - query something but it has a different labelling in the db</li>
-            <li>Missing Data - query something that doesnt exist</li>
+            <li>Distortion: some sames are corrupted by a process</li>
+            <li>Selection Bias: likelihood of a sample dempends on its value</li>
+            <li>Left and right censorship: users come and go from our scrutiny</li>
+            <li>Dependence: samples are never truly independent</li>
         </ul>
+
+        <h3>Database View</h3>
+        <ul>
+            <li>Wow look at all this data</li>
+            <li>some of it is wack tho...</li>
+            <li>missing, corrupted, wrong, duplicate...</li>
+        </ul>
+
+        <h3>Domain Expert</h3>
+        <ul>
+            <li>This dont look right</li>
+            <li>something went wrong</li>
+            <li>I should know what it should look like man...</li>
+        </ul>
+
+        <h3>Data Scientist</h3>
+        <ul>
+            <li>Man's got some bit of all this knowledge!</li>
+        </ul>
+        <div class="img-frame">
+            <img src="img/view.PNG" alt=""/>
+            <img src="img/dirty_data.PNG" alt=""/>
+        </div>
     </div>
 
     
