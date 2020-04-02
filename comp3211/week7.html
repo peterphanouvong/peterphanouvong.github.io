@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 7</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Cache Design (III)</h2>
+    <button class="accordion">Cache Implementation</button>
+    <div class="panel">
+
+        <div class="img-frame">
+            <img src="img/cache_interface.PNG" alt=""/>
+        </div>
+        <p>Cache sits in between the processor and the memory. It's goal is the reduce the memory access time.</p>
+        <p>We will look at the cache's inputs and outputs.</p>
+        <p>Consider first what the CPU wants with the memory:</p>
+        <ul>
+            <li>Read/Write Control</li>
+            <li>Address</li>
+            <li>Data</li>
+        </ul>
+        <p>Now to function optimally, the Cache needs:</p>
+        <ul>
+            <li>Valid: control signal to determine if the request is valid</li>
+            <li>Ready: The cache may not be available to respond to a process request, so there should be a ready signal. Cache available when ready is set.</li>
+        </ul>
+        <p>Cache will then transfer requests to memory if there is miss. But this transfer takes a much longer time.</p>
+    </div>
+
+    <button class="accordion">Cache Controller</button>
+    <div class="panel">
+
+        <div class="img-frame">
+            <img src="img/cache_ctrl_flow.PNG.PNG" alt=""/>
+        </div>
+
+        <p>Essentially this is what happens:</p>
+        <ul>
+            <li>in cache: take it and go back to idle</li>
+            <li>not in cache (clean) : write new data into cache, retrieve from cache</li>
+            <li>not in cache (dirty) : write back old data, write new data into cache, retrieve from cache</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Cache Performance</button>
+    <div class="panel">
+        <p>Cache is impacted by 3 main factors:</p>
+        <ul>
+            <li>Hit time: time it takes to get data from cache (constant)</li>
+            <li>Cache Miss Rate: how often the cache doesn't hold the requested data</li>
+            <li>Miss Penalty: how long it takes the resolve a cache miss (write back, write new)</li>
+        </ul>
+        <p>The aim should be to minimise all these factors.</p>
+
+        <h3>Miss Penalty</h3>
+        <p>Hit time can be minimised by using faster memory. Small memory accesstime, high throughput and fast bus transfer speed.</p>
+        <p>This is not always feasible because it is expensive.</p>
+
+        <h3>Hit Time</h3>
+        <p>You can use another intermediary cache --> multilevel cache to match the speed of the processor</p>
+
+        <h3>Cache Miss</h3>
+        <p>There are 3 main sources of cache miss:</p>
+        <ul>
+            <li>
+                <h4>Cold Miss</h4>
+                <p>Cache is empty to begin with, so you will always miss</p>
+            </li>
+            <li>
+                <h4>Conflict Miss</h4>
+                <p>Ran out of space in a section so the requested data got evicted before being accessed (set associative)</p>
+            </li>
+            <li>
+                <h4>Capacity Miss</h4>
+                <p>Ran out of cache blocks so the requested data got evicted before being accessed (full associative)</p>
+            </li>
+        </ul>
+
+        <div class="img-frame">
+            <img src="img/cache_performance_table.PNG" alt=""/>
+        </div>
+    </div>
+    
+    <h2>Virtual Memory</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <ul>
+            <li>
+                A memory management technique: Uses main memory as a cache for disk memory
+            </li>
+            <li>Each program has its own virtual memory which is mapped the physical/main memory</li>
+        </ul>
+        <p>To implement Virtual Memory a couple things need to happen:</p>
+        <ul>
+            <li>Virtual Addresses need to be mapped to physical addresses</li>
+            <li>The access to physical memory has to be controlled.</li>
+            <li>ALL achieved by the MMU (Memory Management Unit)</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Memory Acess with VA</button>
+    <div class="panel">
+        <div class="img-frame">
+            <img src="img/mem_access_va.PNG" alt=""/>
+        </div>
+        <p>
+            To access memory with a virtual address, the address needs to be translated to a physical address. If it cant be translated we get a page fault, otherwise itll be accessed and transferred.
+        </p>
+    </div>
+
+    <button class="accordion">Address Translation</button>
+    <div class="panel">
+        <p>Translation is based on the Page Table.</p>
+        <h4>Page Table</h4>
+        <ul>
+            <li>implemented in physical memory</li>
+            <li>
+                stores page placement info:
+                <ul>
+                    <li>PTE: page table entries make up the table</li>
+                    <li>VPN: virtual page number indexes the entries</li>
+                    <li>PTR: page table register points to the location of the page table in memory</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="img-frame">
+            <img src="img/page_table.PNG" alt="">
+        </div>
+    </div>
+
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week8 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
