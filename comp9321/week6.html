@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 6</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>RESTful API Security</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>"Security provided by IT SYstems can be defined as the IT system's ability to being able to protect confidentiality and integrity of processed data, procide availability of the suste, and data, accountability for transactions processed, and assurance that the system will continue to perform to its design goals."</p>
+    </div>
+
+    <button class="accordion">Design Security Principles</button>
+    <div class="panel">
+        <div>
+          <h3>Least Privilege</h3>
+          <p>Says that what the user can do is limited to the actions required to fulfil what they need to do. Nothing more, nothing less.</p>
+        </div>
+        <div>
+          <h3>Fail-Safe Defaults</h3>
+          <p>Default should be no authorisation. Then grant authorisation to methods. Not blacklist the ones the shouldn't have. Its whitelist the ones they are allowed to have.</p>
+        </div>
+        <div>
+          <h3>Economy of Mechanism</h3>
+          <p>Make it simple and easy to read. Less complexity = less chance of vulnerability</p>
+        </div>
+        <div>
+          <h3>Complete Mediation</h3>
+          <p>Authorisation required for every access</p>
+        </div>
+        <div>
+          <h3>Open Design</h3>
+          <p>Secure the system as if it is an open design. Rely on proper protectoion </p>
+        </div>
+        <div>
+          <h3>Sparation of Privilege</h3>
+          <p>Multiple keys is better than one key.</p>
+        </div>
+        <div>
+          <h3>Least Common</h3>
+          <p>If noone needs an action, dont provide it</p>
+        </div>
+        <div>
+          <h3>Psychological Acceptibility</h3>
+          <p>Ease of use, general user control flow should followe best security practices.</p>
+        </div>
+        <div>
+          <h3>Defense in Depth</h3>
+          <p>Control should be implemented in layers. If one layer fails, there will be a backup protection layer.</p>
+        </div>
+    </div>
+
+    <button class="accordion">Methods of Protection</button>
+    <div class="panel">
+      <div>
+        <h3>HTTPS (TLS)</h3>
+        <p>https provides secure connection between client and server. Transfer layer security.</p>
+      </div>
+      <div>
+        <h3>HTTP Basic Authentication</h3>
+        <p>username and pword encoded in base 64. Not very secure as it can be decoded easily. Password is also sent repeatedly for each request.</p>
+        <p>Pretty bad idea...</p>
+      </div>
+      <div>
+        <h3>Token Based Method</h3>
+        <p>You login once, then the server gives you a token. The token is the only thing that is looked at to stay logged in.</p>
+        <p>Token is not stored in the system state, its self-contained token that stores it client-side. Tokens are expendable and are refreshed constantly.</p>
+        <p>No more password sent repeatedly and system remains stateless/</p>
+
+        <h4>JSON Web Token</h4>
+        <p>The structure of a JWT is the header(type), payload(data) and signature(encryption info).</p>
+        <p>All this data is encrypted using a hash and secret. Decoding only happens when both the sender and receiver know the secret.</p>
+      </div>
+
+      <div>
+        <h3>API Key</h3>
+        <p>When you sign up for the service, the API issues the user an API Key. It tells the API whos is using the service.</p>
+        <p>Helps manage rate limiting, get analytics,, issue further access tokens.</p>
+        <p>They require a separate platform to manage the keys otherwise it becomes a vulnerability if its managed within the system</p>
+      </div>
+
+      <div>
+        <h3>OAuth</h3>
+        <p>Solves the problem of a third party trying to access client information without sharing vital credentials.</p>
+        <p>It's essentially the logging in with facebook</p>
+        <ol>
+          <li>authiration request to user</li>
+          <li>authorisation granted with a token</li>
+          <li>give the token to the main server</li>
+          <li>server reponds with an access token</li>
+          <li>request for customer data with the accces token</li>
+          <li>receive customer data</li>
+        </ol>
+        <p>For this to occur, the third party service must be registed with the main server. Authorisation of the data is done with OAuth.</p>
+      </div>
+    </div>
+
+    <button class="accordion">Other Important things</button>
+    <div class="panel">'
+      <div>
+        <h3>Rate Limiting</h3>
+        <p>prevent farming and DDoS attacks</p>
+      </div>
+      <div>
+        <h3>Input Validation</h3>
+        <p>Use the right expected fields (strong types) in forms</p>
+      </div>
+      <div>
+        <h3>Restrict HTTP Methods</h3>
+        <p>Limit the provided methods to the ones that are needed. Don't provide stuff that you don't want the users to use.</p>
+      </div>
+      <div>
+        <h3>Sensitive Info in requests</h3>
+        <p>Post/Put can have Sensitive info in the body of the request</p>
+        <p>Should usually be in the header though</p>
+      </div>
+      <div>
+        <h3>Audit Logs</h3>
+        <p>Having logs can help you track any problems encountered</p>
+        <p>Can't have 100% security, so we need to know whats happening to detect and act upon problems that arise.</p>
+      </div>
+    </div>
+
+
+    <h2>Data analytics</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>With data analytics we can use the data to gain useful insights.</p>
+        <p>This is very relevant now since there are a lot of data driven companies that collect a lot of data and can sell this data as their main source of revenue.</p>
+        <p>It is also important within businesses who can analyse their own data to make improvements based on their findings.</p>
+    </div>
+
+    <button class="accordion">Who is involved?</button>
+    <div class="panel">
+      <div>
+        <h3>Clients</h3>
+        <p>Data analytics is important to clients because:</p>
+        <ul>
+          <li>we can look at what their interests are and provide a more tailored experience</li>
+          <li>promote relevant deals</li>
+          <li>provide customer support based on bad reviews</li>
+        </ul>
+      </div>
+        
+      <div>
+        <h3>Businesses</h3>
+        <p>Data analytics is important to business because:</p>
+        <ul>
+          <li>Can analyse business indicators</li>
+          <li>make predictions</li>
+          <li>compliance verification</li>
+          <li>imprrove business processses</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Social Media</h3>
+        <p>Can use social media to find out interests in different demographics. Maybe over time, in a specific place, for age groups etc. We can follow trends.</p>
+      </div>
+    </div>
+
+    <button class="accordion">How is Data used for Analytics?</button>
+    <div class="panel">
+      <p>Integrate raw data and preprocess it</p>
+      <p>Visualise it to show others and interpret</p>
+      <p>Do proper anaylsis with professionals or computers</p>
+
+      <h3>Crowdsourcing Analytics</h3>
+      <p>Experts make graphs and charts to show to the crowd/public who then have a look at the graphs.</p>
+      <p>The crowd proposes explanations and intepretations of the charts which are peer reviewed and then assessed by the organisation</p>
+
+      <h3>Machine Learning</h3>
+      <p>There are many machine learning techniques used to analyse data...</p>
+      <p>All these techniques follow a similar process:</p>
+      <ol>
+        <li>Prepare the data</li>
+        <li>Define and Initalize the model</li>
+        <li>Train your model</li>
+        <li>Validate the model</li>
+        <li>Use the model - explore or deploy as a web service</li>
+        <li>Update and revalidate.</li>
+      </ol>
+      <p>When inputting data, there is a common flow...</p>
+      <div class="img-frame">
+        <img src="img/ML_flow.PNG" alt="">
+      </div>
+    </div>
+
+    <button class="accordion">More on Machine Learning</button>
+    <div class="panel">
+        <p>Machine Learning can be categorised into 3 categories:</p>
+        <ul>
+          <li>supervised</li>
+          <li>unsupervise</li>
+          <li>reinforcement</li>
+        </ul>
+
+        <h3>Questions which ML can answer</h3>
+        <ul>
+          <li>Classification: A or B?</li>
+          <li>Clustering: divide into groups of similar characterstics</li>
+          <li>Regression: How many/How much over time? Mapping to a function</li>
+          <li>Anomoly: Which on is the odd one out?</li>
+          <li>Reinforcement: What do we do now?</li>
+        </ul>
+    </div>
+
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+  
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
