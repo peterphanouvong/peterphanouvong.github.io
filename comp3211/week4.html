@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1</title>
+    <title>Week 4</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../main.css">
@@ -21,8 +21,111 @@
     </div>
     <a href="#">~See Tutorial Questions~</a>
 
-    
-    
+    <h2>Pipelined Processor (III)</h2>
+    <button class="accordion">Control Hazards</button>
+    <div class="panel">
+        <p>Control hazards happen usually when there is a branch instruction. There is a delay in determining the outcome of the branch which, if handled with a stall, with hinder the speed of the pipelined processor.</p>
+        <h3>Stall</h3>
+        <p>We can stall and wait on every single branch to make sure its completed before moving on.</p>
+        <h3>Prediction</h3>
+        <p>Instead of having a constant amount of clock cycles given to completing the worst case branch, we can use prediction.</p>
+        <h4>Static</h4>
+        <p>Static prediction is predicting that the outcome of the branch will always be true(or false). If the prediction is correct, we save time. Otherwise if the prediction is wrong we have to do a flush to fix it. A flush means that all the instructions which were lined up to be executed next must be discarded. Overall though, the average amount of cycles spent on branching should decrease.</p>
+        <h4>Dynamic</h4>
+        <p>Dynamic prediction is predicting the outcome of the branch based off of past branch results (past results are held in a branch history table/prediction table).</p>
+        <p>1 Bit Prediction Scheme: The history bit is 1, then predict taken. If 0, predict not taken. If wrong, flip the history bit.</p>
+        <p>2 Bit Prediction Scheme:</p>
+        <div class="img-frame">
+          <img src="img/2bit_prediction.PNG" alt="">
+        </div>
+    </div>
+
+    <button class="accordion">Pipeline Summary</button>
+    <div class="panel">
+      <div class="img-frame">
+        <img src="img/ps1.PNG" alt=""/>
+        <img src="img/ps2.PNG" alt=""/>
+        <img src="img/ps3.PNG" alt=""/>
+        <img src="img/ps4.PNG" alt=""/>
+        <img src="img/ps5.PNG" alt=""/>
+      </div>
+    </div>
+
+    <h2>Introduction to the Memory System</h2>
+    <button class="accordion">Memory Technologies</button>
+    <div class="panel">
+        <p>Memory can be sectioned off into different parts:</p>
+        <ul>
+          <li>
+            Volatile
+            <ul>
+              <li>SRAM : Static Random Access Memory.</li>
+              <li>DRAM : Dynamic Random Access Memory.</li>
+            </ul>
+          </li>
+          <li>
+            Non-Volatile
+            <ul>
+              <li>Flash</li>
+              <li>Disk</li>
+            </ul>
+          </li>
+        </ul>
+        <p>These memories have different uses inside the computer!</p>
+    </div>
+    <button class="accordion">SRAM</button>
+    <div class="panel">
+      <p>SRAM is fast, low density, content persists until power off.</p>
+      <div class="img-frame">
+        <img src="img/sram-outer.PNG" alt="">
+      </div>
+      <ul>
+        <li>D is data in out</li>
+        <li>D is controled by WE_L and OE_L. When OE_L is low, it means that output is enabled.</li>
+      </ul>
+    </div>
+
+    <button class="accordion">DRAM</button>
+    <div class="panel">
+      <ul>
+        <li>has capacitors</li>
+        <li>needs to be constantly refreshed</li>
+        <li>higher capacity than SRAM</li>
+        <li>multiple banks</li>
+        <li>shared I/O bus like SRAM</li>
+        <li>shared address buss too</li>
+      </ul>
+      <div class="img-frame">
+        <img src="img/dram-cell.PNG" alt="">
+      </div>
+      <p>The access cycle goes as follows: row -> col -> precharge</p>
+    </div>
+
+    <button class="accordion">Hard Disk Drive</button>
+    <div class="panel">
+      <p>Platter of non-magnetic material coated with a thin layer of magnetic material.</p>
+      <p>It is partitioned into tracks and sectors. Data is stored by magnetising fields on the platter which represent bits</p>
+
+      <h4>HDD Performance</h4>
+      <ul>
+        <li>Data rate : how many bytes per second the drive can deliver to the CPU (5-40MB/s)</li>
+        <li>Seek time : how long to spin the read/write head to hover over the right field (10-20ms)</li>
+      </ul>
+    </div>
+
+    <button class="accordion">Memory Hierarchy</button>
+    <div class="panel">
+      <p>CPU -> SRAM -> DRAM -> DISK</p>
+      <p>The fastest memory closest to the CPU.</p>
+
+      <h3>The principle of locality</h3>
+      <h4>Temporal</h4>
+      <p>This says that something that is accessed will probably need to be accessed again soon</p>
+      <h4>Spacial</h4>
+      <p>This says that if somethings is accessed its neighbours will probably be accessed soon too</p>
+    </div>
+
+
     <br>
     <div class="bot-nav">
         <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>

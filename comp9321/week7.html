@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 7</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Classification</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>Classifiers categorise data with labels</p>
+        <p>Give the classifer training data and then give it an answer(label)</p>
+        <p>Then once the classifier has been trained with the training data and solution, you can then give it new input data and it will try to classify it into categories.</p>
+    </div>
+    <button class="accordion">Example</button>
+    <div class="panel">
+        <ul>
+            <li>Lets say you have data (colour, weight, size) on fruits: apple, banana, orange</li>
+            <li>Given the all the data with corresponding labels you can train the classifier to then predict what the fruit is, given some colour, wieght and size.</li>
+        </ul>
+    </div>
+
+    <button class="accordion">KNN</button>
+    <div class="panel">
+        <p>KNN is a type of classifier that uses the principle of K-nearest neighbours</p>
+        <ul>
+            <li>It is considered to be NON-PARAMETRIC and INSTANCED BASED.</li>
+            <li>this means that it will have no prexisting assumptions about the data and itll memorise the training instances as knowledge to predict the class of new inputs.</li>
+        </ul>
+
+        <h4>Requirements</h4>
+        <p>The KNN Classifier has 4 requirements:</p>
+        <ol>
+            <li>distance metric: how to measure the closeness of 2 data points</li>
+            <li>how many neighbours: how many data points to consider</li>
+            <li>Weighting function: the weight of the data point (usually dependent on the distance)</li>
+            <li>Aggregate function: how to collate the weights of each datapoint</li>
+        </ol>
+
+        <div class="img-frame">
+            <img src="img/neighbouts.PNG" alt="">
+        </div>
+
+        <p>All these factors alter and adjust how the data points are classified. You can change these factors as you like to better suit the data that you have.</p>
+    </div>
+
+    <button class="accordion">Training the Classifier</button>
+    <div class="panel">
+        <p>In order to train the classifier you need to first have a dataset with answers and that.</p>
+        <ul>
+            <li>What you can do is partition the dataset so that a percentage of the dataset is going in as the training set, and then have some leftover to use as input.</li>
+            <li>Once the dataset is trained, you can then use the leftover input and check it against the actual values. From there you can further adjust the settings to get a better fit.</li>
+            <li>train_x : training input</li>
+            <li>train_y: training output</li>
+            <li>test_x: testing input</li>
+            <li>test_y: desired testing output, used to check against the actual output of the classifier.</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Generalising/Fitting</button>
+    <div class="panel">
+        <p>The aim of using machine learning like this is to have a general model that you can use to classify new inputs.</p>
+        <ul>
+            <li>Getting a good model which can be applied to new inputs is call Generalisation</li>
+            <li>Overfitting: is when you're classifier only really works for your dataset. Its too fitted to the data its been given. This is usually because the number of neighbours is too small</li>
+            <li>Underfitting: is when the classifier doesn't really work at all because its too general. Usually when too many neighbours are taken into account.</li>
+        </ul>
+
+        <h4>Choosing an appropriate value for K</h4>
+        <p>large K can make our dataset quite general, but too large and its not useful. It might be considering points which aren't true neighbours.</p>
+        <p>A general rule of thumb is to not go greater than the sqrt of k.</p>
+    </div>
+
+    <button class="accordion">Advantages and Disadvantages</button>
+    <div class="panel">
+        <h4>When to consider</h4>
+        <ul>
+            <li>When there aren't many columns/attributes to consider</li>
+            <li>Have lots of data</li>
+        </ul>
+        <h4>Advantages</h4>
+        <ul>
+            <li>Fast</li>
+            <li>Can learn complex target functions</li>
+            <li>No loss of data</li>
+        </ul>
+
+        <h4>Disadvantages</h4>
+        <ul>
+            <li>Slow at query</li>
+            <li>sensitive: if you have a noisy dataset then the bad neighbours can really mess things up</li>
+            <li>Bigger the dataset, more impact on performance</li>
+        </ul>
+
+        <div class="img-frame">
+            <img src="img/knn-sense.PNG" alt="">
+        </div>
+    </div>
+    <br>
+
+    <h2>Decision Tree</h2>
+
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>Pretty old Machine Learning algorithm.</p>
+        <p>Very intuitive and easy to implement</p>
+
+        <h4>When to consider</h4>
+        <ul>
+            <li>Data available in attribute value pairs</li>
+            <li>discrete values</li>
+            <li>Missing data</li>
+            <li>possible noise</li>
+            <li>eg. medical diagnosis, risk analysis</li>
+        </ul>
+
+        <p>Essentially you take in some data and then you create a decision tree based off of the data that you have, then you can introduce new data to be parsed into the decision tree which will then give you some output.</p>
+
+        <div class="img-frame"><img src="img/dtree-format.PNG" alt=""></div>
+    </div>
+
+    <button class="accordion">What makes a good tree?</button>
+    <div class="panel">
+        <p>Simpler and smaller is better</p>
+        <p>It may be human readable, but not follow human logic</p>
+    </div>
+
+
+
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
