@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 8</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Regression</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>Regression is essentially finding the line of best fit for a set of data points</p>
+        <p>Types of Regression:</p>
+        <ul>
+            <li>Simple Linear Regression</li>
+            <li>Multiple Linear Regression</li>
+            <li>Polynomial Linear Regression</li>
+        </ul>
+        <p>Regression works well when:</p>
+        <ul>
+            <li>there is a relationship between the features and the target</li>
+            <li>you are dealing with continuous numerical data as opposed to categorical data</li>
+        </ul>
+        <p>Regression is pretty good but the results are easily swayed by:</p>
+        <ul>
+            <li>outliers</li>
+            <li>relevant features --> can use a correlation coefficient to determine how strong the relationship between the target and the feature is. It'll help determine whether or not to include it.</li>
+        </ul>
+    </div>
+    
+    <button class="accordion">Machine Learning Evaluation</button>
+    <div class="panel">
+        <p>Measuring machine learning performance can be tricky.</p>
+        <p>There are a lot of metrics that we use to evaulate the machine learning result. The ones we choose depends on what machine learning method we have used and the context of the data.</p>
+        <p>Some examples are:</p>
+        <ul>
+            <li>Accuracy</li>
+            <li>Precision and Recall</li>
+            <li>F1 Score</li>
+            <li>Log-Loss</li>
+            <li>K-fold Validation</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Accuracy</button>
+    <div class="panel">
+        <p>Accuracy = correct predictions / total predictions * 100%</p>
+        <h3>Accuracy with Imbalanced Classes</h3>
+        <p>Lets imagine that your model always no matter what thinks that every picture is a picture of a cat.</p>
+        <p>Now in your testing set it turns out that 99/100 of your test cases are actually cats and there is one dog.</p>
+        <p>That means your accuracy will be 99%. But if you had a testing set that had only 1/100 cats, then you would have an accuracy of 1%</p>
+        <p>This problem can be fixed by:</p>
+        <ul>
+            <li>Balancing the test cases</li>
+            <li>increase the minorities</li>
+            <li>Synthesise without exact replicas to avoid overfitting</li>
+            <li>Decrease majorities</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Precision and Recall</button>
+    <div class="panel">
+        <ul>
+            <li>TP = true positive, FP = false positive, FN = false negative</li>
+            <li>precision: TP/(TP + FP): The amount that were actually out of what you said were cats</li>
+            <li>recall: TP/(TP + FN) : the amount that were actually cats out of all the cats</li>
+        </ul>
+    </div>
+
+    <button class="accordion">K-fold Cross Validation</button>
+    <div class="panel">
+        <p>Use this when you have a small data set and it isnt wise to split into training and testing sets</p>
+        <ul>
+            <li>Section off the data into K sections. Each section should be a reflection of all the classes</li>
+            <li>pick one out of the K sections, this one is for testing, all the others are for training</li>
+            <li>Train and then test. Get your results and keep them</li>
+            <li>Choose a new section for testing a repeat</li>
+        </ul>
+        <p>By the end you should have K lots of results which can be collated to have a substantial amount of results to be analysed</p>
+        <p>Making each section a reflection of all the classes is called stratification. You're just trying to make sure each test has a all the classes so we dont get the problem with accuracy and class imbalances.</p>
+    </div>
+
+
+    
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>

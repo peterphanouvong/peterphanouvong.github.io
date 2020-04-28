@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 9</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/87110ac577.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<main class="container">
+    <div class="top-nav">
+        <h1>Week 9</h1>
+        <select id="week" name="weeks">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+          </select>
+    </div>
+    <a href="#">~See Tutorial Questions~</a>
+
+    <h2>Clustering</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>Clustering is a form of unserpervised learning. It is similar to classification but there are no labels.</p>
+        <h3>Unsupervised Learning</h3>
+        <ul>
+            <li>no labels</li>
+            <li>Capture the structure of interest</li>
+            <li>Visualise the structure of a dataset</li>
+            <li>Discover groups and outliers</li>
+            <li>Can be used to extract features for supervised learning</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Clustering Paradigms</button>
+    <div class="panel">
+        <p>There are many types of clustering:</p>
+        <ul>
+            <li>Flat: into groups</li>
+            <li>Hierarchal: into hierarchy</li>
+            <li>Hard: Data points belong to only one group</li>
+            <li>Soft: Data point can belong to more than one group</li>
+        </ul>
+        <h3>The Basic Ideas</h3>
+        <p>The basic idea is to group the similar points together in a cluster</p>
+        <p>But the question is how do we determine which point is in which cluster?</p>
+    </div>
+
+    <button class="accordion">K-Means</button>
+    <div class="panel">
+        <ul>
+            <li>Pick K arbitrary points</li>
+            <li>take the distance between these points to all the other points</li>
+            <li>A data point will be assigned a cluster if it is the closest cluster</li>
+        </ul>
+
+        <h3>Properties of K-Means</h3>
+        <ul>
+            <li>Guarenteed to converge in a finite number of itereations</li>
+            <li>Running time per iteration will differ</li>
+            <li>Assign data points to the closest centre takes O(kN) time</li>
+        </ul>
+
+        <h3>K-Means Variations/parameters</h3>
+        <ul>
+            <li>Specifying the inital centres changes what the final clustering will look like</li>
+            <li>
+                There is a strategy to get better clusters
+                <ul>
+                    <li>Pick the points to be spaced out maximally</li>
+                </ul>
+            </li>
+            <li>Maxing out the spacing between points is not always the best</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Evaluation</button>
+    <div class="panel">
+        <p>Good clustering:</p>
+        <ul>
+            <li>High IntraClass similarity (Compactness): data points within the same cluster are similar</li>
+            <li>Low InterClass similarity (Isolation): data points between clusters are not similar at all</li>
+        </ul>
+
+        <h3>Limitations of K-Means</h3>
+        <ul>
+            <li>Works only on simple clusters (SMILEY FACE)</li>
+            <li>data points have to be blobbed together to be detected as a cluster</li>
+            <li>Complex clusters will go undetected</li>
+        </ul>
+    </div>
+
+    <h2>Hierarchal Clustering</h2>
+    <button class="accordion">Overview</button>
+    <div class="panel">
+        <p>type of unserpervised machine learning</p>
+        <p>Two types:</p>
+        <ul>
+            <li>Agglomerative: combining clusters into one big cluster</li>
+            <li>Divisive: start with a mega cluster that gets broken down into smaller ones</li>
+        </ul>
+    </div>
+    <button class="accordion">How are they formed?</button>
+    <div class="panel">
+        <h3>Linkage Criteria</h3>
+        <p>This refers to the distance between clusters. How do we measure it?</p>
+        <ul>
+            <li>Single Linkage : smallest distance between two data points from different clusters</li>
+            <li>Complete Linkage : greatest distance between two data points from different clusters</li>
+            <li>Average Linkage : distance between the centroids of the clusters</li>
+        </ul>
+        <p>Each linkage criteria will result in a different hierarchy</p>
+
+        <h3>Proximity Matrix</h3>
+        <p>When forming the hierarchy, a proximity matrix is made, mapping the distance between clusters</p>
+        <p>The closest clusters are then merged together to form a new cluster</p>
+        <p>The process is repeated until there is only one cluster</p>
+
+        <h3>How do we choose how many clusters? (Divisive)</h3>
+        <h4>Dendrogram</h4>
+        <p>A dendrogram is a tree diagram</p>
+        <ul>
+            <li>When 2 clusters are joined, join them in the dendrogram</li>
+            <li>The height of the join is equal to the distance between the clusters</li>
+            <li>Set the threshold distance such that it cuts throught the middle of the tallest vertical line</li>
+            <li>the number of clusters = the number of lines intersected by the threshold</li>
+        </ul>
+    </div>
+
+    <button class="accordion">Evaluation</button>
+    <div class="panel">
+        <h3>Advantages</h3>
+        <ul>
+            <li>Easy to implement</li>
+            <li>No need to decide the number of clusters</li>
+        </ul>
+
+        <h3>Disadvantages</h3>
+        <ul>
+            <li>Not suitable for a large dataset</li>
+            <li>sensitive to outliers</li>
+            <li>intial seeds have a big impact on the final result</li>
+            <li>linkage criteria is selected rather arbitrarily</li>
+        </ul>
+    </div>
+    
+    <br>
+    <div class="bot-nav">
+        <a class="week-btn" href="../notes.html"><i class="fas fa-arrow-left"></i> Home</i></a>
+        <a class="week-btn" href="week2.html">Week2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    
+</main>
+</body>
+
+<script src="../main.js"></script>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+</html>
